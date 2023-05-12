@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Товары
+{% endblock %}
+
+{% block content %}
+    <body>
+        <h1>Результаты поиска</h1>
+        {% if results %}
+            <ul>
+                <div class="product-wrapper">
+                    {% for product in results %}
+                        <a href="{{ url_for('product', product_id=product.id) }}">
+                            <div class="product-card">
+                                <img src="{{ product.img_url }}">
+                                <h2>{{ product.category }} {{ product.brand }} {{ product.name }} {{ product.color}}</h2>
+                                <p>Цена: {{ product.price }} руб.</p>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </ul>
+        {% else %}
+            <p>Ничего не найдено.</p>
+        {% endif %}
+    </body>
+{% endblock %}
